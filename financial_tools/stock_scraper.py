@@ -16,9 +16,9 @@ class YahooScraper:
         response = requests.get(url, headers=self.headers)
         self.soup = BeautifulSoup(response.text, "html.parser")
 
-    def get_price(self):
+    def get_price(self) -> float:
         price = self.soup.find("fin-streamer", {"data-field": "regularMarketPrice"}).text
-        return price
+        return float(price.replace(',', ''))
 
 
 if __name__ == '__main__':
